@@ -23,7 +23,7 @@ tidy_dgeometric <- function(single_trial_prob = .5, num_attempts = 5){
 
 
 
-  tibble::tibble(observed_attempt, single_trial_prob, probability, cumulative_prob)
+  tibble::tibble(observed_attempt, probability, single_trial_prob, cumulative_prob)
 
 }
 
