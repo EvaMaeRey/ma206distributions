@@ -370,11 +370,13 @@ prize_wheel %>%
   geom_lollipop()
 ```
 
-![](man/figures/prizewheelviz-1.png)<!-- --> The function `geom_fulcrum`
-can be used to visualize the balancing point of the data, which is also
-the expected value. Then using the `stamp_eq_expected_value`,
-`stamp_eq_variance`, and `stamp_eq_standard_deviation`, we can relay the
-mathematical formula’s for computing quantities about this distribution.
+![](man/figures/prizewheelviz-1.png)<!-- -->
+
+The function `geom_fulcrum` can be used to visualize the balancing point
+of the data, which is also the expected value. Then using the
+`stamp_eq_expected_value`, `stamp_eq_variance`, and
+`stamp_eq_standard_deviation`, we can relay the mathematical formula’s
+for computing quantities about this distribution.
 
 ``` r
 last_plot() +
@@ -484,7 +486,7 @@ ggplot() +
   - <https://evamaerey.github.io/ma206distributions/reference/index.html>
   - <https://evamaerey.github.io/ma206equations/reference/index.html>
 
-## Visualizing a Discrete Random Variable without {ma206distributions} functions
+## Visualizing a Discrete Random Variable *without* {ma206distributions} functions
 
 Probability problems could be structured as data frames visualized with
 the same tools used in the stats part of the class.
