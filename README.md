@@ -9,6 +9,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 <a href="https://evamaerey.github.io/ma206distributions/"><img src="man/figures/logo.png" align="right" height="120" /></a>
 
+    # installation
+    remotes::install_github("EvaMaeRey/ma206distributions")
+
 The `ma206distributions` package allows you to easily visualize common
 distributions for statistical and probabilistic analytics in ggplot2.
 This package has been built along side its sister package
