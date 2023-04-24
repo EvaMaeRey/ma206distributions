@@ -21,7 +21,7 @@ geom_lollipop <- function(annotate = FALSE, ...){
   list(
     geom_post(...),
     geom_point(...),
-    geom_post_label()
+    geom_post_label(...)
   )
   }else{
     list(

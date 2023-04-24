@@ -87,18 +87,18 @@ The goal of this project is to provide ready-to-use functions that will make it 
 <!-- 3. Provide additional **dataframes** for ma206 that are probabilities from curriculum (probability problems in text book).  These might be moved to ma206data package at some point. -->
 <!-- 4. Provide interactive app which 1) demonstrates distribution characteristics, allowing easy manipulation of parameters 2) connects to new package functionality by quoting back code underlying the app. -->
 
-### Objective #1. provide data frames that relate outcomes and probabilities
+### Objective #1. provide outcome-probability pairings in data frames that relate outcomes and probabilities
 
 #### Binomial distribution with `tidy_dbinom`
 
 Currently, students may use R as a calculator for quick computation of probabilistic quantities.  However, using existing methodologies may divorce quantities from useful context.  
 
-For example, consider the question:  What is the probability of rolling a six exactly two times in eight die rolls.
+For example, consider the question:  What is the probability of rolling a six exactly two times in eight die rolls?
 
-Solving that problem with current toolbox might look like this. 
+Solving that problem with the current toolbox might look like this. 
 
 ```{r}
-dbinom(x = 2, size = 8, prob = 1/6)
+dbinom(x = 2, size = 10, prob = 1/6)
 ```
 
 This solution is concise, but lacks context, and doesn't nicely parlay to answer other related and adjacent questions. 
@@ -109,7 +109,7 @@ We propose instead that a full set of paired outcomes and probabilities be made 
 ```{r}
 library(ma206distributions)
 options(scipen = 8, digits = 3)
-tidy_dbinom(single_trial_prob = 1/6, 8)
+tidy_dbinom(single_trial_prob = 1/6, num_trials = 8)
 ```
 
 🤔 Should `tidy_dbinom` be called something else?  Maybe `dbinom_df` is better? or `df_dbinom`? Are we part of a fad of calling everything 'tidy' and it not meaning much? 🙃
@@ -147,14 +147,9 @@ ggplot() +
                num_trials = 8,
                annotate = T) +    # from ma206distributions
   scale_x_counting() +                                        # from ma206distributions
-  labs(title = "Rolling a die 8 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...8 sixes") +
-    geom_lollipop(annotate = T,  # help! why doesn't this work?
-                data = tidy_dbinom(single_trial_prob = 1/6,
-                                   num_trials = 8),
-                mapping = ggplot2::aes(x = num_successes, y = probability))
+  labs(title = "Rolling a die 8 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...8 sixes")
 ```
 
-🚧 Why isn't annotate (labeling option) working in stamp_dbinom()? 😭 See source code [here](https://github.com/EvaMaeRey/ma206distributions/blob/main/R/stamp_dbinom.R) and for geom_lollipop(), where annotate does work [here](https://github.com/EvaMaeRey/ma206distributions/blob/main/R/geom_lollipop.R).
 
 
 ### Including relevant equations
@@ -233,7 +228,8 @@ And the function stamp_dgeometric also exists as a shortcut for displaying the d
 ```{r geometricstamp}
 ggplot() + 
   stamp_dgeometric(single_prob = 1/3, 
-                   num_attempts = 9) + 
+                   num_attempts = 9,
+                   annotate = T) + 
   scale_x_counting() + 
   theme_axis_x_truncated()
 ```
@@ -302,6 +298,7 @@ prize_wheel %>%
 The function `geom_fulcrum` can be used to visualize the balancing point of the data, which is also the expected value.  Then using the `stamp_eq_expected_value`, `stamp_eq_variance`, and `stamp_eq_standard_deviation`, we can relay the mathematical formula's for computing quantities about this distribution.
 
 ```{r fulcrum}
+library(ma206equations)
 last_plot() +
   aes(weight = frequency) +
   geom_fulcrum(color = "red", 

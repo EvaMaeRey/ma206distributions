@@ -47,7 +47,7 @@ computationally with these distributions and equations.
 
 <!-- 4. Provide interactive app which 1) demonstrates distribution characteristics, allowing easy manipulation of parameters 2) connects to new package functionality by quoting back code underlying the app. -->
 
-### Objective \#1. provide data frames that relate outcomes and probabilities
+### Objective \#1. provide outcome-probability pairings in data frames that relate outcomes and probabilities
 
 #### Binomial distribution with `tidy_dbinom`
 
@@ -56,16 +56,16 @@ probabilistic quantities. However, using existing methodologies may
 divorce quantities from useful context.
 
 For example, consider the question: What is the probability of rolling a
-six exactly two times in eight die rolls.
+six exactly two times in eight die rolls?
 
-Solving that problem with current toolbox might look like this.
+Solving that problem with the current toolbox might look like this.
 
 ``` r
-dbinom(x = 2, size = 8, prob = 1/6)
+dbinom(x = 2, size = 10, prob = 1/6)
 ```
 
 ``` 
-   [1] 0.2604762
+   [1] 0.29071
 ```
 
 This solution is concise, but lacks context, and doesn’t nicely parlay
@@ -80,7 +80,7 @@ the function:
 ``` r
 library(ma206distributions)
 options(scipen = 8, digits = 3)
-tidy_dbinom(single_trial_prob = 1/6, 8)
+tidy_dbinom(single_trial_prob = 1/6, num_trials = 8)
 ```
 
 ``` 
@@ -133,9 +133,9 @@ at the counting values of x, the support of the distribution.
 ``` r
 library(ma206distributions)
 library(tidyverse)
-tidy_dbinom(single_trial_prob = 1/6, num_trials = 10) %>%   # from ma206distributions
+tidy_dbinom(single_trial_prob = 1/6, num_trials = 8) %>%   # from ma206distributions
   ggplot() + 
-  labs(title = "Rolling a die 10 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...10 sixes") +
+  labs(title = "Rolling a die 8 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...8 sixes") +
   aes(x = num_successes, 
       y = probability) + 
   geom_lollipop(annotate = T) +           # from ma206distributions
@@ -153,23 +153,13 @@ distribution’s underpinnings.
 library(ma206equations)
 ggplot() + 
   stamp_dbinom(single_trial_prob = 1/6, 
-               num_trials = 10,
+               num_trials = 8,
                annotate = T) +    # from ma206distributions
   scale_x_counting() +                                        # from ma206distributions
-  labs(title = "Rolling a die 10 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...10 sixes") +
-    geom_lollipop(annotate = T,  # help! why doesn't this work?
-                data = tidy_dbinom(single_trial_prob = 1/6,
-                                   num_trials = 10),
-                mapping = ggplot2::aes(x = num_successes, y = probability))
+  labs(title = "Rolling a die 8 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...8 sixes")
 ```
 
 ![](man/figures/stampbinomial-1.png)<!-- -->
-
-🚧 Why isn’t annotate (labeling option) working in stamp\_dbinom()? 😭 See
-source code
-[here](https://github.com/EvaMaeRey/ma206distributions/blob/main/R/stamp_dbinom.R)
-and for geom\_lollipop(), where annotate does work
-[here](https://github.com/EvaMaeRey/ma206distributions/blob/main/R/geom_lollipop.R).
 
 ### Including relevant equations
 
@@ -183,13 +173,13 @@ that unpacked.
 library(ma206equations)
 ggplot() + 
   stamp_dbinom(single_trial_prob = 1/6, 
-               num_trials = 10) +    # from ma206distributions
+               num_trials = 8) +    # from ma206distributions
   scale_x_counting()  +
   stamp_eq_binomial(x = 7, 
                     y = .25,
                     size = 8) +
   stamp_eq_choose(x = 7, y = .2, 
-                  size = 3, color = "black")
+                  size = 5, color = "black")
 ```
 
 ![](man/figures/binomialwequations-1.png)<!-- -->
@@ -238,13 +228,13 @@ tidy_dgeometric(single_trial_prob = 2/3,
 
 ``` 
    # A tibble: 5 × 4
-     observed_attempt single_trial_prob probability cumulative_prob
-                <int>             <dbl>       <dbl>           <dbl>
-   1                1             0.667     0.667             0.667
-   2                2             0.667     0.222             0.889
-   3                3             0.667     0.0741            0.963
-   4                4             0.667     0.0247            0.988
-   5                5             0.667     0.00823           0.996
+     observed_attempt probability single_trial_prob cumulative_prob
+                <int>       <dbl>             <dbl>           <dbl>
+   1                1     0.667               0.667           0.667
+   2                2     0.222               0.667           0.889
+   3                3     0.0741              0.667           0.963
+   4                4     0.0247              0.667           0.988
+   5                5     0.00823             0.667           0.996
 ```
 
 🤔 🚧 Would the single\_trial\_prob columns be more appropriately stored
@@ -294,7 +284,8 @@ displaying the distribution.
 ``` r
 ggplot() + 
   stamp_dgeometric(single_prob = 1/3, 
-                   num_attempts = 9) + 
+                   num_attempts = 9,
+                   annotate = T) + 
   scale_x_counting() + 
   theme_axis_x_truncated()
 ```
@@ -379,6 +370,7 @@ of the data, which is also the expected value. Then using the
 for computing quantities about this distribution.
 
 ``` r
+library(ma206equations)
 last_plot() +
   aes(weight = frequency) +
   geom_fulcrum(color = "red", 
@@ -392,7 +384,7 @@ last_plot() +
 
 ## A comparison with the status quo
 
-The following code is what might be use if the ma206distributions and
+The following code is what might be used if the ma206distributions and
 ma206equations functions are not used.
 
 The equations in the plot were produce in the following fashion (no
