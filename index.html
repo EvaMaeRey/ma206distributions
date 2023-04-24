@@ -82,24 +82,24 @@
 <!-- 3. Provide additional **dataframes** for ma206 that are probabilities from curriculum (probability problems in text book).  These might be moved to ma206data package at some point. -->
 <!-- 4. Provide interactive app which 1) demonstrates distribution characteristics, allowing easy manipulation of parameters 2) connects to new package functionality by quoting back code underlying the app. -->
 <div class="section level3">
-<h3 id="objective-1-provide-data-frames-that-relate-outcomes-and-probabilities">Objective #1. provide data frames that relate outcomes and probabilities<a class="anchor" aria-label="anchor" href="#objective-1-provide-data-frames-that-relate-outcomes-and-probabilities"></a>
+<h3 id="objective-1-provide-outcome-probability-pairings-in-data-frames-that-relate-outcomes-and-probabilities">Objective #1. provide outcome-probability pairings in data frames that relate outcomes and probabilities<a class="anchor" aria-label="anchor" href="#objective-1-provide-outcome-probability-pairings-in-data-frames-that-relate-outcomes-and-probabilities"></a>
 </h3>
 <div class="section level4">
 <h4 id="binomial-distribution-with-tidy_dbinom">Binomial distribution with <code>tidy_dbinom</code>
 <a class="anchor" aria-label="anchor" href="#binomial-distribution-with-tidy_dbinom"></a>
 </h4>
 <p>Currently, students may use R as a calculator for quick computation of probabilistic quantities. However, using existing methodologies may divorce quantities from useful context.</p>
-<p>For example, consider the question: What is the probability of rolling a six exactly two times in eight die rolls.</p>
-<p>Solving that problem with current toolbox might look like this.</p>
+<p>For example, consider the question: What is the probability of rolling a six exactly two times in eight die rolls?</p>
+<p>Solving that problem with the current toolbox might look like this.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">dbinom</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fl">8</span>, prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<pre><code>   [1] 0.2604762</code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">dbinom</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<pre><code>   [1] 0.29071</code></pre>
 <p>This solution is concise, but lacks context, and doesn’t nicely parlay to answer other related and adjacent questions.</p>
 <p>We propose instead that a full set of paired outcomes and probabilities be made available to students when asking this question via the ma206distributions function <code>tidy_dbinom</code>. To answer the preceding question, then, students would consult the table that they produce using the function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://evamaerey.github.io/ma206distributions/">ma206distributions</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">8</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/tidy_dbinom.html">tidy_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/tidy_dbinom.html">tidy_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, num_trials <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <pre><code>   # A tibble: 9 × 4
      num_successes probability single_trial_prob num_trials
              &lt;int&gt;       &lt;dbl&gt;             &lt;dbl&gt;      &lt;dbl&gt;
@@ -121,9 +121,9 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://evamaerey.github.io/ma206distributions/">ma206distributions</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/tidy_dbinom.html">tidy_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, num_trials <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>   <span class="co"># from ma206distributions</span></span>
+<span><span class="fu"><a href="reference/tidy_dbinom.html">tidy_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, num_trials <span class="op">=</span> <span class="fl">8</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>   <span class="co"># from ma206distributions</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Rolling a die 10 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...10 sixes"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Rolling a die 8 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...8 sixes"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">num_successes</span>, </span>
 <span>      y <span class="op">=</span> <span class="va">probability</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="reference/geom_lollipop.html">geom_lollipop</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span>           <span class="co"># from ma206distributions</span></span>
@@ -134,16 +134,11 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ma206equations</span><span class="op">)</span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="reference/stamp_dbinom.html">stamp_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, </span>
-<span>               num_trials <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>               num_trials <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>               annotate <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span>    <span class="co"># from ma206distributions</span></span>
 <span>  <span class="fu"><a href="reference/scale_x_counting.html">scale_x_counting</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>                                        <span class="co"># from ma206distributions</span></span>
-<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Rolling a die 10 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...10 sixes"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="reference/geom_lollipop.html">geom_lollipop</a></span><span class="op">(</span>annotate <span class="op">=</span> <span class="cn">T</span>,  <span class="co"># help! why doesn't this work?</span></span>
-<span>                data <span class="op">=</span> <span class="fu"><a href="reference/tidy_dbinom.html">tidy_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>,</span>
-<span>                                   num_trials <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
-<span>                mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">num_successes</span>, y <span class="op">=</span> <span class="va">probability</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Rolling a die 8 times: \nProbabilities of rolling 0 sixes, 1 six, 2 sixes,...8 sixes"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/stampbinomial-1.png"><!-- --></p>
-<p>🚧 Why isn’t annotate (labeling option) working in stamp_dbinom()? 😭 See source code <a href="https://github.com/EvaMaeRey/ma206distributions/blob/main/R/stamp_dbinom.R" class="external-link">here</a> and for geom_lollipop(), where annotate does work <a href="https://github.com/EvaMaeRey/ma206distributions/blob/main/R/geom_lollipop.R" class="external-link">here</a>.</p>
 </div>
 </div>
 <div class="section level3">
@@ -154,13 +149,13 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ma206equations</span><span class="op">)</span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="reference/stamp_dbinom.html">stamp_dbinom</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, </span>
-<span>               num_trials <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">+</span>    <span class="co"># from ma206distributions</span></span>
+<span>               num_trials <span class="op">=</span> <span class="fl">8</span><span class="op">)</span> <span class="op">+</span>    <span class="co"># from ma206distributions</span></span>
 <span>  <span class="fu"><a href="reference/scale_x_counting.html">scale_x_counting</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>  <span class="fu">stamp_eq_binomial</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">7</span>, </span>
 <span>                    y <span class="op">=</span> <span class="fl">.25</span>,</span>
 <span>                    size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">stamp_eq_choose</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">7</span>, y <span class="op">=</span> <span class="fl">.2</span>, </span>
-<span>                  size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
+<span>                  size <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/binomialwequations-1.png"><!-- --></p>
 <p>🚧 We should probably be including left hand side of the equation for stamp_eq_binomial. See equations spreadsheet <a href="https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/ma389_stats_formulas.csv" class="external-link">here</a> .</p>
 <p>🚧 We should probably be consistent with capitalization (N v. n) and selection variable (k v. r). See equations spreadsheet <a href="https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/ma389_stats_formulas.csv" class="external-link">here</a> .</p>
@@ -183,13 +178,13 @@
 <span><span class="fu"><a href="reference/tidy_dgeometric.html">tidy_dgeometric</a></span><span class="op">(</span>single_trial_prob <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span>, </span>
 <span>                num_attempts <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>   # A tibble: 5 × 4
-     observed_attempt single_trial_prob probability cumulative_prob
-                &lt;int&gt;             &lt;dbl&gt;       &lt;dbl&gt;           &lt;dbl&gt;
-   1                1             0.667     0.667             0.667
-   2                2             0.667     0.222             0.889
-   3                3             0.667     0.0741            0.963
-   4                4             0.667     0.0247            0.988
-   5                5             0.667     0.00823           0.996</code></pre>
+     observed_attempt probability single_trial_prob cumulative_prob
+                &lt;int&gt;       &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;
+   1                1     0.667               0.667           0.667
+   2                2     0.222               0.667           0.889
+   3                3     0.0741              0.667           0.963
+   4                4     0.0247              0.667           0.988
+   5                5     0.00823             0.667           0.996</code></pre>
 <p>🤔 🚧 Would the single_trial_prob columns be more appropriately stored as meta data? How would be best to do that? Source code <a href="https://github.com/EvaMaeRey/ma206distributions/blob/main/R/tidy_dbinom.R" class="external-link">here</a> We at least should switch order of columns.</p>
 <p>Students can focus on the information in question, but also see that it sits in the context of the larger probability distribution. [For the geometric distribution, it should be noted that the complete distribution cannot be displayed as the ‘support’ is infinite; theoretically you could wait forever for the first success.]</p>
 <p>Students can easily feed the data frame produced with tidy_dgeometric() into a visualization software. The function <code>theme_axis_x_truncated</code> helps us communicate that we aren’t visualizing the full distribution (which extends to infinity).</p>
@@ -213,7 +208,8 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="reference/stamp_dgeometric.html">stamp_dgeometric</a></span><span class="op">(</span>single_prob <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, </span>
-<span>                   num_attempts <span class="op">=</span> <span class="fl">9</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>                   num_attempts <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>                   annotate <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="reference/scale_x_counting.html">scale_x_counting</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="reference/theme_axis_x_truncated.html">theme_axis_x_truncated</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/geometricstamp-1.png"><!-- --></p>
@@ -289,7 +285,8 @@
 <p><img src="reference/figures/prizewheelviz-1.png"><!-- --></p>
 <p>The function <code>geom_fulcrum</code> can be used to visualize the balancing point of the data, which is also the expected value. Then using the <code>stamp_eq_expected_value</code>, <code>stamp_eq_variance</code>, and <code>stamp_eq_standard_deviation</code>, we can relay the mathematical formula’s for computing quantities about this distribution.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">last_plot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ma206equations</span><span class="op">)</span></span>
+<span><span class="fu">last_plot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">aes</span><span class="op">(</span>weight <span class="op">=</span> <span class="va">frequency</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/geom_fulcrum.html">geom_fulcrum</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, </span>
 <span>               shape <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -301,7 +298,7 @@
 <div class="section level2">
 <h2 id="a-comparison-with-the-status-quo">A comparison with the status quo<a class="anchor" aria-label="anchor" href="#a-comparison-with-the-status-quo"></a>
 </h2>
-<p>The following code is what might be use if the ma206distributions and ma206equations functions are not used.</p>
+<p>The following code is what might be used if the ma206distributions and ma206equations functions are not used.</p>
 <p>The equations in the plot were produce in the following fashion (no functions or package pre-built):</p>
 <div class="figure">
 <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%7B%7B_N%7DC%7B_k%7D%7D%20%2A%20p%5Ekq%5E%7BN-k%7D%20%22%7B%7B_N%7DC%7B_k%7D%7D%20*%20p%5Ekq%5E%7BN-k%7D%22" alt=""><p class="caption">{{_N}C{_k}} * p<sup>kq</sup>{N-k}</p>
