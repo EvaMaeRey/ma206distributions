@@ -59,12 +59,15 @@ knitr::include_graphics("hex_sticker_dist.png")
   
 <a href="https://evamaerey.github.io/ma206distributions/"><img src="man/figures/logo.png" align="right" height="120" /></a>
 
-```{reval=F}
+```{r eval=F}
 # installation
 remotes::install_github("EvaMaeRey/ma206distributions")
 ```
 
-The `ma206distributions` package allows you to easily visualize common distributions for statistical and probabilistic analytics in ggplot2.  This package has been built along side its sister package `ma206equations`.  Both packages will be discussed here, but the source code for `ma206equations` resides [here](https://github.com/EvaMaeRey/ma206equations).  See also `ma206data`  [here](https://github.com/EvaMaeRey/ma206data).
+
+
+
+The `ma206distributions` package allows you to easily visualize common distributions for  probabilistic thinking.  This package has been built along side its sister package `ma206equations`.  Both packages will be discussed here, but the source code for `ma206equations` resides [here](https://github.com/EvaMaeRey/ma206equations).  See also `ma206data`  [here](https://github.com/EvaMaeRey/ma206data).
 
 ## Note to the reader
 
@@ -482,9 +485,9 @@ See also:
 
 # Architechture we will use
 
-### How do we bundle up our work into concept-sized usable bits? Functions.
+### *How do we bundle up our work into concept-sized usable bits?* **Functions.**
 
-### How do we bundle up related functions? Packages.
+### *How do we bundle up related functions?* **Packages.**
 
 
 - We will still follow the steps outlined in this data package readme: https://github.com/EvaMaeRey/tidytitanic

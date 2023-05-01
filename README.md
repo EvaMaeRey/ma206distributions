@@ -9,14 +9,15 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 <a href="https://evamaerey.github.io/ma206distributions/"><img src="man/figures/logo.png" align="right" height="120" /></a>
 
-    # installation
-    remotes::install_github("EvaMaeRey/ma206distributions")
+``` r
+# installation
+remotes::install_github("EvaMaeRey/ma206distributions")
+```
 
 The `ma206distributions` package allows you to easily visualize common
-distributions for statistical and probabilistic analytics in ggplot2.
-This package has been built along side its sister package
-`ma206equations`. Both packages will be discussed here, but the source
-code for `ma206equations` resides
+distributions for probabilistic thinking. This package has been built
+along side its sister package `ma206equations`. Both packages will be
+discussed here, but the source code for `ma206equations` resides
 [here](https://github.com/EvaMaeRey/ma206equations). See also
 `ma206data` [here](https://github.com/EvaMaeRey/ma206data).
 
@@ -446,7 +447,7 @@ binomial_distribution
 binomial_distribution
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/unnamed-chunk-11-1.png)<!-- -->
 
 detail for the interested: Another possibility is using the
 `stat_function()` function in ggplot2 to produce visualizations of a
@@ -474,7 +475,7 @@ ggplot() +
   labs(title = "Given 20 trials where the probability for success in a single\n trial is .2, what are the probabilities for each possible\nnumber of observed successes ")
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 ## Browse functions
 
@@ -523,7 +524,7 @@ discrete_random
 discrete_random
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 This contrasts with the expressive and fluid experience delivered by
 ma206equations and ma206distribution functions:
@@ -540,7 +541,7 @@ expected %>%
   stamp_eq_standard_deviation(x = 12000, y = .65)
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 # Project timeline
 
@@ -566,9 +567,9 @@ See also:
 
 # Architechture we will use
 
-### How do we bundle up our work into concept-sized usable bits? Functions.
+### *How do we bundle up our work into concept-sized usable bits?* **Functions.**
 
-### How do we bundle up related functions? Packages.
+### *How do we bundle up related functions?* **Packages.**
 
   - We will still follow the steps outlined in this data package readme:
     <https://github.com/EvaMaeRey/tidytitanic>

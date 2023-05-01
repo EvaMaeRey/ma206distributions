@@ -51,9 +51,12 @@ ui <- fluidPage(
 'library(ggplot2)
 library(ma206distributions)
 ggplot() +
-  stamp_dbinom(single_trial_prob = input$z, num_trials = input$n) +    # from ma206distributions
+  stamp_dbinom(single_trial_prob = input$z,
+               num_trials = input$n,
+               annotate = T) +    # from ma206distributions
   scale_x_counting() +                                        # from ma206distributions
-  labs(title = "Probability of rolling 0,1,2,...10 sixes when rolling a fair die 10 times")' ->
+  labs(title = paste("Probability of rolling 0,1,2,...", input$n,
+                     "sixes when rolling a fair die", input$n, "times"))' ->
     for_shiny
 
 
